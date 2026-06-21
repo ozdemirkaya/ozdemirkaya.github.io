@@ -760,6 +760,13 @@ header.scrolled .nav-container {
   justify-content: space-between;
 }
 
+.contact-subtitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 1rem;
+}
+
 .contact-message {
   font-size: 1.15rem;
   color: var(--text-secondary);
