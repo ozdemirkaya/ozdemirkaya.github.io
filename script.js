@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
     emailBtn.addEventListener('click', (e) => {
       e.preventDefault();
       const originalText = emailText.textContent;
-      const emailAddress = 'ozdemirkaya.dev@gmail.com';
+      const emailAddress = 'ozdemiirkaya@gmail.com';
       
       navigator.clipboard.writeText(emailAddress).then(() => {
         emailText.textContent = 'Panoya Kopyalandı! ✓';
