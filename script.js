@@ -79,7 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 5. Contact Form submission simulation
+  // 5. Contact Form submission (Web3Forms API Integration)
   const contactForm = document.getElementById('portfolio-contact-form');
   const submitBtn = document.getElementById('submit-btn');
   const statusMsg = document.getElementById('form-status-msg');
@@ -92,30 +92,65 @@ document.addEventListener('DOMContentLoaded', () => {
       const originalBtnContent = submitBtn.innerHTML;
       submitBtn.disabled = true;
       submitBtn.innerHTML = `Gönderiliyor... <span class="cursor" style="height: 10px; width: 6px;"></span>`;
+      statusMsg.style.display = 'none'; // Clear any previous message
       
-      // Simulate API call
-      setTimeout(() => {
-        // Form submitted successfully
+      const formData = new FormData(contactForm);
+      const object = Object.fromEntries(formData);
+      const json = JSON.stringify(object);
+
+      fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: json
+      })
+      .then(async (response) => {
+        let res = await response.json();
         submitBtn.innerHTML = originalBtnContent;
         submitBtn.disabled = false;
-        
-        statusMsg.className = 'form-status success';
-        statusMsg.innerHTML = `<i data-lucide="check-circle" style="width: 18px; height: 18px;"></i> Mesajınız başarıyla iletildi. En kısa sürede dönüş yapacağım!`;
-        
+
+        if (response.status === 200) {
+          // Success
+          statusMsg.style.display = 'flex';
+          statusMsg.className = 'form-status success';
+          statusMsg.innerHTML = `<i data-lucide="check-circle" style="width: 18px; height: 18px;"></i> Mesajınız başarıyla iletildi. En kısa sürede dönüş yapacağım!`;
+          contactForm.reset();
+        } else {
+          // API error
+          statusMsg.style.display = 'flex';
+          statusMsg.className = 'form-status error';
+          statusMsg.innerHTML = `<i data-lucide="alert-triangle" style="width: 18px; height: 18px;"></i> Hata: ${res.message || 'Mesaj gönderilemedi. Lütfen tekrar deneyin.'}`;
+        }
+
         // Re-init lucide icons for statusMsg
         if (typeof lucide !== 'undefined') {
           lucide.createIcons();
         }
-        
-        // Clear form
-        contactForm.reset();
-        
-        // Hide success message after 5 seconds
+
+        // Hide status message after 6 seconds
         setTimeout(() => {
           statusMsg.style.display = 'none';
-        }, 5000);
+        }, 6000);
+      })
+      .catch(error => {
+        console.error('Submission error:', error);
+        submitBtn.innerHTML = originalBtnContent;
+        submitBtn.disabled = false;
         
-      }, 1500);
+        statusMsg.style.display = 'flex';
+        statusMsg.className = 'form-status error';
+        statusMsg.innerHTML = `<i data-lucide="alert-triangle" style="width: 18px; height: 18px;"></i> Bağlantı hatası oluştu. Lütfen internet bağlantınızı kontrol edin.`;
+        
+        if (typeof lucide !== 'undefined') {
+          lucide.createIcons();
+        }
+
+        setTimeout(() => {
+          statusMsg.style.display = 'none';
+        }, 6000);
+      });
     });
   }
   
