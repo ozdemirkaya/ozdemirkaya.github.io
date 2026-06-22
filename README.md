@@ -13,6 +13,7 @@ Visit the live website here:
 - **CSS3:** Custom properties (CSS variables), Flexbox, CSS Grid, and Glassmorphism effects.
 - **Vanilla JavaScript (ES6+):** Responsive behavior, animations, and dynamic utilities.
 - **GitHub Pages:** Static site hosting and deployment.
+- **Web3Forms:** Serverless form submission handling.
 - **Lucide Icons:** SVG icons loaded via CDN.
 - **Google Fonts:** Plus Jakarta Sans & JetBrains Mono typography.
 
@@ -22,8 +23,8 @@ Visit the live website here:
 - **Modern Dark UI:** Neon accent colors and premium glassmorphism styling.
 - **Smooth Scroll Animations:** Interactivity powered by CSS transitions and the JavaScript Intersection Observer API.
 - **Project Showcase Section:** Structured grid highlighting featured projects with quick repository and detail links.
-- **Contact Section:** Integrated channels including Email, LinkedIn, and GitHub links.
-- **Client-Side Validation and User Feedback:** Real-time form input verification and immediate submission status feedback.
+- **Contact Section & Functional Form:** Direct social/email links and a fully integrated contact form.
+- **Client-Side Validation and User Feedback:** Real-time form input verification and immediate submission status feedback via API.
 - **SEO-Friendly Structure:** Configured with descriptive title, meta tags, and semantic HTML5 elements.
 
 ## 📂 File Structure
@@ -68,6 +69,15 @@ Global styles, animations, and theme configurations can be modified by editing t
 ### Adding Projects
 To add or modify featured projects, update the `.projects-grid` container in `index.html`. 
 *Note: Brand logos (like LinkedIn and GitHub) are implemented as inline SVGs for maximum reliability, speed, and compatibility.*
+
+### Contact Form & Web3Forms Integration
+The contact form sends submissions to [Web3Forms](https://web3forms.com/).
+- **Access Key:** The API access key is defined as a hidden input in `index.html`:
+  ```html
+  <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE">
+  ```
+- **Submission Logic:** JavaScript (`script.js`) intercepts the submit event, gathers form data, and submits it to Web3Forms API via `fetch`.
+- **Cache Busting:** If you update `script.js`, bump the query version parameter in `index.html` (e.g., `script.js?v=7`) to force browsers to reload the script instead of reading it from cache.
 
 ### Updating Contact Information
 Contact details and links should be updated in:
