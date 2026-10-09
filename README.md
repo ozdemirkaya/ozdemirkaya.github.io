@@ -1,6 +1,6 @@
-# Özdemir Kaya — Personal Portfolio Website
+# Özdemir Kayan — Personal Portfolio Website
 
-This repository contains the source code for the personal portfolio website of Özdemir Kaya. The website showcases software development expertise, project highlights, and contact channels in a modern, responsive, and single-page dark interface.
+This repository contains the source code for the personal portfolio website of Özdemir Kayan. The website showcases software development expertise, project highlights, and contact channels in a modern, responsive, and single-page dark interface.
 
 ## 🌐 Live Demo
 
