@@ -85,6 +85,23 @@ document.addEventListener('DOMContentLoaded', () => {
   const statusMsg = document.getElementById('form-status-msg');
 
   if (contactForm && submitBtn && statusMsg) {
+    const setStatusMessage = (type, icon, message) => {
+      statusMsg.style.display = 'flex';
+      statusMsg.className = `form-status ${type}`;
+      statusMsg.replaceChildren();
+
+      const iconEl = document.createElement('i');
+      iconEl.setAttribute('data-lucide', icon);
+      iconEl.style.width = '18px';
+      iconEl.style.height = '18px';
+
+      statusMsg.append(iconEl, document.createTextNode(` ${message}`));
+
+      if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
+      }
+    };
+
     contactForm.addEventListener('submit', (e) => {
       e.preventDefault();
       
@@ -113,20 +130,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (response.status === 200) {
           // Success
-          statusMsg.style.display = 'flex';
-          statusMsg.className = 'form-status success';
-          statusMsg.innerHTML = `<i data-lucide="check-circle" style="width: 18px; height: 18px;"></i> Mesajınız başarıyla iletildi. En kısa sürede dönüş yapacağım!`;
+          setStatusMessage('success', 'check-circle', 'Mesajınız başarıyla iletildi. En kısa sürede dönüş yapacağım!');
           contactForm.reset();
         } else {
           // API error
-          statusMsg.style.display = 'flex';
-          statusMsg.className = 'form-status error';
-          statusMsg.innerHTML = `<i data-lucide="alert-triangle" style="width: 18px; height: 18px;"></i> Hata: ${res.message || 'Mesaj gönderilemedi. Lütfen tekrar deneyin.'}`;
-        }
-
-        // Re-init lucide icons for statusMsg
-        if (typeof lucide !== 'undefined') {
-          lucide.createIcons();
+          setStatusMessage('error', 'alert-triangle', `Hata: ${res.message || 'Mesaj gönderilemedi. Lütfen tekrar deneyin.'}`);
         }
 
         // Hide status message after 6 seconds
@@ -139,13 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
         submitBtn.innerHTML = originalBtnContent;
         submitBtn.disabled = false;
         
-        statusMsg.style.display = 'flex';
-        statusMsg.className = 'form-status error';
-        statusMsg.innerHTML = `<i data-lucide="alert-triangle" style="width: 18px; height: 18px;"></i> Bağlantı hatası oluştu. Lütfen internet bağlantınızı kontrol edin.`;
-        
-        if (typeof lucide !== 'undefined') {
-          lucide.createIcons();
-        }
+        setStatusMessage('error', 'alert-triangle', 'Bağlantı hatası oluştu. Lütfen internet bağlantınızı kontrol edin.');
 
         setTimeout(() => {
           statusMsg.style.display = 'none';
