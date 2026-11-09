@@ -782,6 +782,7 @@ header.scrolled .nav-container {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+  margin-inline: -1.25rem 1.25rem;
 }
 
 .contact-item {
