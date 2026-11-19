@@ -794,13 +794,14 @@ header.scrolled .nav-container {
 .contact-grid {
   display: grid;
   grid-template-columns: 0.9fr 1.1fr;
-  gap: 5rem;
+  grid-template-rows: auto 1fr;
+  column-gap: 5rem;
+  row-gap: 0;
 }
 
-.contact-info {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+.contact-vision {
+  grid-column: 1;
+  grid-row: 1;
 }
 
 .contact-subtitle {
@@ -821,6 +822,9 @@ header.scrolled .nav-container {
   flex-direction: column;
   gap: 1.5rem;
   margin-inline: -1.25rem 1.25rem;
+  grid-column: 1;
+  grid-row: 2;
+  align-self: end;
 }
 
 .contact-item {
@@ -845,6 +849,7 @@ header.scrolled .nav-container {
 .contact-item-icon {
   width: 44px;
   height: 44px;
+  flex-shrink: 0;
   border-radius: 10px;
   background: hsla(260, 100%, 68%, 0.1);
   display: flex;
@@ -859,6 +864,10 @@ header.scrolled .nav-container {
   color: var(--secondary);
 }
 
+.contact-item-details {
+  min-width: 0;
+}
+
 .contact-item-details h4 {
   font-size: 0.85rem;
   color: var(--text-muted);
@@ -869,11 +878,14 @@ header.scrolled .nav-container {
 .contact-item-details p {
   font-weight: 600;
   font-size: 1rem;
+  overflow-wrap: anywhere;
 }
 
 /* Contact Form */
 .contact-form-wrapper {
   padding: 3rem;
+  grid-column: 2;
+  grid-row: 1 / -1;
 }
 
 .form-group {
@@ -1019,7 +1031,8 @@ footer {
 @media (max-width: 1024px) {
   .hero-name { font-size: 3.2rem; }
   .hero-title { font-size: 1.8rem; }
-  .about-grid, .contact-grid { gap: 3rem; }
+  .about-grid { gap: 3rem; }
+  .contact-grid { column-gap: 3rem; row-gap: 0; }
   .projects-grid { gap: 2rem; }
 }
 
@@ -1105,14 +1118,51 @@ footer {
   .hero-ctas,
   .about-content,
   .about-stats,
-  .contact-info,
+  .contact-vision,
+  .contact-channels,
   .contact-form-wrapper {
     min-width: 0;
   }
 
-  .about-grid, .contact-grid {
+  .about-grid {
     grid-template-columns: 1fr;
     gap: 3rem;
+  }
+
+  .contact-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    gap: 2.5rem;
+  }
+
+  .contact-vision,
+  .contact-channels,
+  .contact-form-wrapper {
+    grid-column: 1;
+    grid-row: auto;
+  }
+
+  .contact-vision {
+    order: 1;
+  }
+
+  .contact-channels {
+    order: 3;
+    align-self: stretch;
+    margin-inline: 0;
+  }
+
+  .contact-item {
+    padding: 1rem;
+    gap: 1rem;
+  }
+
+  .contact-item-details p {
+    font-size: 0.85rem;
+  }
+
+  .contact-message {
+    margin-bottom: 0;
   }
 
   .about-stats {
@@ -1138,6 +1188,7 @@ footer {
   }
   
   .contact-form-wrapper {
+    order: 2;
     padding: 2rem;
   }
   
