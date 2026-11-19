@@ -350,6 +350,10 @@ header.scrolled .nav-container {
   max-width: 580px;
 }
 
+.hero-desc strong {
+  color: var(--text-primary);
+}
+
 .hero-ctas {
   display: flex;
   gap: 1.5rem;
