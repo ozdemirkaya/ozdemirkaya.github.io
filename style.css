@@ -429,6 +429,32 @@ header.scrolled .nav-container {
   grid-row: 1 / -1;
 }
 
+/* Hero without Python terminal card (remove 'no-terminal' class on #hero to restore) */
+#hero.no-terminal .hero-visual {
+  display: none;
+}
+
+#hero.no-terminal .hero-grid {
+  grid-template-columns: 1fr;
+  grid-template-rows: auto;
+  justify-items: center;
+  text-align: center;
+}
+
+#hero.no-terminal .hero-tag {
+  align-self: center;
+}
+
+#hero.no-terminal .hero-desc {
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#hero.no-terminal .hero-ctas {
+  justify-content: center;
+}
+
 .terminal {
   width: 100%;
   background: hsl(230, 25%, 7%);
