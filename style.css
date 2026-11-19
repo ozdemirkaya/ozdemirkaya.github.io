@@ -1057,7 +1057,7 @@ footer {
   }
 
   .hero-visual {
-    order: 2;
+    order: 3;
   }
   
   .hero-tag {
@@ -1069,7 +1069,7 @@ footer {
   }
   
   .hero-ctas {
-    order: 3;
+    order: 2;
     justify-content: center;
     flex-wrap: wrap;
   }
